@@ -118,7 +118,16 @@ describe('Login Api', () => {
       }
     });
 
-  
+    // it('should return status 405 when use method get in /api/login', async () => {
+    //   try {
+    //     await axios.get(loginUrl);
+    //   } catch (error) {
+    //     const errorRes = (error as any).response as AxiosResponse;
+    //     expect(errorRes.status).toBe(405);
+    //   }
+    // });
+    
+
     // !TODO:
     // it('should fail to login with invalid credentials', async () => {
     //   try {
