@@ -1,9 +1,10 @@
-const axios = require('axios');
+import axios from 'axios';
+import { AxiosResponse } from 'axios';
 
-const baseUrl = 'https://reqres.in';
+const baseUrl: string = 'https://reqres.in';
 
 describe('Login Api', () => {
-  const loginUrl = `${baseUrl}/api/login`;
+  const loginUrl: string = `${baseUrl}/api/login`;
 
   // Meta data tests
   describe('Test Meta data', () => {
@@ -13,9 +14,11 @@ describe('Login Api', () => {
           password: 'cityslicka',
         });
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
-        expect(error.response.data.error).toBe('Missing email or username');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
+        expect(errorRes.data.error).toBe('Missing email or username');
       }
     });
 
@@ -25,9 +28,11 @@ describe('Login Api', () => {
           email: 'eve.holt@reqres.in',
         });
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
-        expect(error.response.data.error).toBe('Missing password');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
+        expect(errorRes.data.error).toBe('Missing password');
       }
     });
 
@@ -35,8 +40,10 @@ describe('Login Api', () => {
       try {
         await axios.post(loginUrl, {});
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
       }
     });
 
@@ -52,9 +59,11 @@ describe('Login Api', () => {
           password: 'cityslicka',
         });
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
-        expect(error.response.data.error).toBe('Missing email or username');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
+        expect(errorRes.data.error).toBe('Missing email or username');
       }
     });
 
@@ -65,9 +74,11 @@ describe('Login Api', () => {
           password: null,
         });
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
-        expect(error.response.data.error).toBe('Missing password');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
+        expect(errorRes.data.error).toBe('Missing password');
       }
     });
 
@@ -85,8 +96,10 @@ describe('Login Api', () => {
           password: 'cityslicka',
         });
       } catch (error) {
-        expect(error.response.status).toBe(200);
-        expect(error.response.data).toHaveProperty('token');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(200);
+        expect(errorRes.data).toHaveProperty('token');
       }
     });
 
@@ -97,12 +110,15 @@ describe('Login Api', () => {
           password: 'cityslicka',
         });
       } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('error');
-        expect(error.response.data.error).toBe('user not found');
+        const errorRes = (error as any).response as AxiosResponse;
+
+        expect(errorRes.status).toBe(400);
+        expect(errorRes.data).toHaveProperty('error');
+        expect(errorRes.data.error).toBe('user not found');
       }
     });
 
+  
     // !TODO:
     // it('should fail to login with invalid credentials', async () => {
     //   try {
